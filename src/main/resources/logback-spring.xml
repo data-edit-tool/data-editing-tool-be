@@ -1,0 +1,21 @@
+<configuration>
+    <!-- 프로필 정보 불러오기 -->
+    <springProperty scope="deploy" name="PROFILE" source="spring.profiles.active" />
+
+    <!-- 로그 출력 패턴 정의 -->
+    <property name="LOG_PATTERN" value="%highlight(%-5level) %cyan(%d{yyyy-MM-dd HH:mm:ss}) %yellow([%thread]) %green([%logger{0}:%line]) - %msg%n" />
+
+    <!-- 콘솔 로그 출력 정의 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="deploy">
+        <!-- 콘솔 적용 -->
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+</configuration>

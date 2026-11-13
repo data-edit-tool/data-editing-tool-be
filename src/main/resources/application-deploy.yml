@@ -1,0 +1,49 @@
+spring:
+  pid:
+    file: local.pid
+
+  data:
+    mongodb:
+      uri: ${DB_URL}
+      database: ${DB_DATABASE:data_edit}
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+# 애플리케이션 변수 설정
+service:
+  web:
+    # 클라이언트 URL
+    url: http://localhost:3000
+  server:
+    # 서버 URL
+    url: http://localhost:9061
+  # CORS 설정
+  cors:
+    # 허용 요청 대상 목록
+    origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:3001,http://localhost:9061}
+    # 허용 헤더 목록
+    headers: Content-Type, Authorization
+    # 자격증명 설정
+    credentials: true
+  batch:
+    # 배치 사용 유무
+    status: false
+  # 파일 설정
+  file:
+    # 파일 저장 디렉토리 경로
+    path: ${FILE_PATH:/files}
+    csv-path: ${CSV_FILE_PATH:/files/csv}
+    # 파일 다운로드 링크 경로
+    url: ${FILE_URL:http://localhost/files}
+
+  # opensmile 환경변수
+  opensmile:
+    container-name: ${OPENSMILE_CONTAINER_NAME:opensmile}
+    root-path: ${OPENSMILE_ROOT_PATH:/data/opensmile}
+    csv-path: ${OPENSMILE_CSV_PATH:/data/csv}
+    exec-bin: ${OPENSMILE_EXEC_BIN:/data/opensmile/build/progsrc/smilextract/SMILExtract}
+    config-path: ${OPENSMILE_CONFIG_PATH:/data/opensmile/config/prosody/prosodyAcf.conf}
